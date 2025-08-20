@@ -18,7 +18,6 @@ with app.app_context():
 def home():
     return redirect(url_for("contacts"))
 
-# ------------------ Validation ------------------
 def validate_contact(name, phone):
     if not name:
         return False, "Name is required"
@@ -26,7 +25,6 @@ def validate_contact(name, phone):
         return False, "Phone must be exactly 10 digits"
     return True, None
 
-# ------------------ Resources ------------------
 class ContactListResource(Resource):
     def get(self):
         contacts = Contact.query.all()
@@ -85,4 +83,5 @@ api.add_resource(ContactListResource, "/contacts", endpoint="contacts")
 api.add_resource(ContactResource, "/contacts/<int:id>", endpoint="contact")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
+
